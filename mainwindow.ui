@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>智能家居控制面板</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+    background-color: #f0f0f0;
+}
+QGroupBox {
+    font-weight: bold;
+    border: 2px solid #cccccc;
+    border-radius: 5px;
+    margin-top: 1ex;
+    padding-top: 10px;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px 0 5px;
+}
+QPushButton {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 4px;
+}
+QPushButton:hover {
+    background-color: #45a049;
+}
+QPushButton:pressed {
+    background-color: #3d8b40;
+}
+QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 8px;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 #c4c4c4);
+    margin: 2px 0;
+    border-radius: 4px;
+}
+QSlider::handle:horizontal {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f);
+    border: 1px solid #5c5c5c;
+    width: 18px;
+    margin: -2px 0;
+    border-radius: 9px;
+}
+QProgressBar {
+    border: 2px solid grey;
+    border-radius: 5px;
+    text-align: center;
+}
+QProgressBar::chunk {
+    background-color: #4CAF50;
+    border-radius: 3px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QGroupBox" name="systemStatusGroup">
+      <property name="title">
+       <string>系统状态</string>
+      </property>
+      <layout class="QGridLayout" name="systemStatusLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="dateTimeLabel">
+         <property name="text">
+          <string>日期时间: 2024-01-01 12:00:00</string>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="uptimeLabel">
+         <property name="text">
+          <string>运行时间: 00:00:00</string>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QLabel" name="networkStatusLabel">
+         <property name="text">
+          <string>网络状态: 已连接</string>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: green;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="lightControlGroup">
+      <property name="title">
+       <string>灯光控制</string>
+      </property>
+      <layout class="QVBoxLayout" name="lightControlLayout">
+       <item>
+        <widget class="QComboBox" name="roomComboBox">
+         <item>
+          <property name="text">
+           <string>客厅</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>卧室</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>厨房</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>书房</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="lightToggleButton">
+         <property name="text">
+          <string>开灯</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="brightnessLabel">
+         <property name="text">
+          <string>亮度: 50%</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="brightnessSlider">
+         <property name="minimum">
+          <number>0</number>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="value">
+          <number>50</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QProgressBar" name="brightnessProgressBar">
+         <property name="minimum">
+          <number>0</number>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="value">
+          <number>50</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QGroupBox" name="temperatureControlGroup">
+      <property name="title">
+       <string>温度控制</string>
+      </property>
+      <layout class="QVBoxLayout" name="temperatureControlLayout">
+       <item>
+        <widget class="QLabel" name="currentTempLabel">
+         <property name="text">
+          <string>当前温度: 22°C</string>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="targetTempLabel">
+         <property name="text">
+          <string>目标温度: 24°C</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="targetTempSlider">
+         <property name="minimum">
+          <number>16</number>
+         </property>
+         <property name="maximum">
+          <number>30</number>
+         </property>
+         <property name="value">
+          <number>24</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="acModeComboBox">
+         <item>
+          <property name="text">
+           <string>自动</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>制冷</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>制热</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>通风</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="securityMonitorGroup">
+      <property name="title">
+       <string>安全监控</string>
+      </property>
+      <layout class="QVBoxLayout" name="securityMonitorLayout">
+       <item>
+        <widget class="QLabel" name="cameraLabel">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>摄像头画面</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: 2px solid #cccccc; background-color: #000000; color: white;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="motionIndicatorLabel">
+         <property name="text">
+          <string>移动检测: 正常</string>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: green;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="securityModeComboBox">
+         <item>
+          <property name="text">
+           <string>居家模式</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>外出模式</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>睡眠模式</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="alarmHistoryTextEdit">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="1" colspan="2">
+     <widget class="QGroupBox" name="scheduleManagementGroup">
+      <property name="title">
+       <string>日程管理</string>
+      </property>
+      <layout class="QHBoxLayout" name="scheduleManagementLayout">
+       <item>
+        <widget class="QCalendarWidget" name="calendarWidget"/>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="scheduleRightLayout">
+         <item>
+          <widget class="QLabel" name="eventListLabel">
+           <property name="text">
+            <string>日程事件:</string>
+           </property>
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListWidget" name="eventListWidget">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>200</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="eventInputLayout">
+           <item>
+            <widget class="QLineEdit" name="eventLineEdit">
+             <property name="placeholderText">
+              <string>输入事件内容...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QTimeEdit" name="eventTimeEdit">
+             <property name="time">
+              <time>
+               <hour>12</hour>
+               <minute>0</minute>
+               <second>0</second>
+              </time>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="addEventButton">
+             <property name="text">
+              <string>添加事件</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1200</width>
+     <height>18</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
